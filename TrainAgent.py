@@ -12,15 +12,18 @@ from stable_baselines.common.evaluation import evaluate_policy
 
 env = gym.make('qap-v0')
 
+num_steps = 0
 
 def callback(locals_, globals_):
     self_ = locals_['self']
-    
-    current_impr = (env.initial_sum-env.current_sum)/env.initial_sum*100
+    global num_steps
+    if (num_steps+1) % 1000 == 0:
+    	current_impr = (env.initial_sum-env.current_sum)/env.initial_sum*100
     #mff_impr =(env.initial_sum-env.mff_sum)/env.initial_sum*100
     #value = current_impr - mff_impr
-    summary = tf.Summary(value=[tf.Summary.Value(tag='improvement', simple_value=current_impr)])
-    locals_['writer'].add_summary(summary, self_.num_timesteps)
+    	summary = tf.Summary(value=[tf.Summary.Value(tag='improvement', simple_value=current_impr)])
+    	locals_['writer'].add_summary(summary, self_.num_timesteps)
+    num_steps+=1
     return True
 
 # Instantiate the agent
