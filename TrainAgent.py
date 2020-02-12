@@ -17,7 +17,7 @@ num_steps = 0
 def callback(locals_, globals_):
     self_ = locals_['self']
     global num_steps
-    if (num_steps+1) % 1000 == 0:
+    if (num_steps+1) % 5000 == 0:
         current_impr = (env.initial_sum-env.current_sum)/env.initial_sum*100
         mff_impr =(env.initial_sum-env.mff_sum)/env.initial_sum*100
         over_mff = current_impr - mff_impr
@@ -34,5 +34,5 @@ model = DQN('MlpPolicy', env, verbose=0,tensorboard_log="./tensorboard/")
 # Train the agent
 model.learn(total_timesteps=int(4e5),callback=callback)
 # Save the agent
-model.save("./models/dqn10Test")
+model.save("./models/model_dqn_10_prevrew_1M")
 
