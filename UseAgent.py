@@ -14,7 +14,7 @@ from stable_baselines.common.evaluation import evaluate_policy
 env = gym.make('qap-v0')
 
 # Load the trained agent
-model = DQN.load("./dqn10Test",tensorboard_log="./tensorboard/")
+model = DQN.load("./models/model_dqn_10_mffrew_1M",tensorboard_log="./tensorboard/")
 model.set_env(env)
 
 # Evaluate the agent
