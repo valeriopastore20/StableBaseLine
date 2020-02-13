@@ -17,7 +17,7 @@ num_steps = 0
 def callback(locals_, globals_):
     self_ = locals_['self']
     global num_steps
-    if (num_steps+1) % 5000 == 0:
+    if (num_steps+1) % 2000 == 0:
         current_impr = (env.initial_sum-env.current_sum)/env.initial_sum*100
         mff_impr =(env.initial_sum-env.mff_sum)/env.initial_sum*100
         over_mff = current_impr - mff_impr
@@ -29,8 +29,8 @@ def callback(locals_, globals_):
     return True
 
 # Instantiate the agent
-model = DQN('MlpPolicy', env, verbose=0,tensorboard_log="./tensorboard/")
-#model = DQN('MlpPolicy', env, learning_rate=1e-3, prioritized_replay=True, verbose=1,tensorboard_log="./tensorboard/")
+#model = A2C('MlpPolicy', env, verbose=0,tensorboard_log="./tensorboard/")
+model = DQN('MlpPolicy', env, learning_rate=1e-3, prioritized_replay=True, verbose=1,tensorboard_log="./tensorboard/")
 # Train the agent
 model.learn(total_timesteps=int(1e6),callback=callback)
 # Save the agent
