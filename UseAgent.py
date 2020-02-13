@@ -14,7 +14,7 @@ from stable_baselines.common.evaluation import evaluate_policy
 env = gym.make('qap-v0')
 
 # Load the trained agent
-model = DQN.load("./models/model_dqn_10_mffrew_1M",tensorboard_log="./tensorboard/")
+model = DQN.load("./models/test",tensorboard_log="./tensorboard/")
 model.set_env(env)
 
 # Evaluate the agent
@@ -22,7 +22,7 @@ mean_reward, n_steps = evaluate_policy(model, env, n_eval_episodes=10)
 
 
 # Enjoy trained agent
-num_simulations = 100
+num_simulations = 500
 x = [i for i in range(0,num_simulations)] 
 y1 = [0 for j in range(0,num_simulations)]
 

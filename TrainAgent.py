@@ -30,9 +30,9 @@ def callback(locals_, globals_):
 
 # Instantiate the agent
 #model = A2C('MlpPolicy', env, verbose=0,tensorboard_log="./tensorboard/")
-model = DQN('MlpPolicy', env, learning_rate=1e-3, prioritized_replay=True, verbose=1,tensorboard_log="./tensorboard/")
+model = DQN('MlpPolicy', env, learning_rate=1e-3, prioritized_replay=True, verbose=0,tensorboard_log="./tensorboard/")
 # Train the agent
 model.learn(total_timesteps=int(1e6),callback=callback)
 # Save the agent
-model.save("./models/model_dqn_10_prevrew_1M")
+model.save("./models/model_dqn_10_mffrew_1M")
 
