@@ -1,5 +1,6 @@
 import gym
 import gym_qap
+import gym_qapConst
 import gym_qapImg
 import tensorflow as tf
 import os

@@ -1,8 +1,9 @@
 import gym
 import gym_qap
+import gym_qapConst
 import gym_qapImg
 import matplotlib.pyplot as plt
-
+import os
 
 from stable_baselines import DQN
 from stable_baselines import A2C
@@ -11,7 +12,7 @@ from stable_baselines.common.evaluation import evaluate_policy
 
 
 
-env = gym.make('qap-v0')
+env = gym.make('qapConst-v0')
 
 # Load the trained agent
 path = os.getenv("HOME")+"/models/model_"
