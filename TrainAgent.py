@@ -33,7 +33,7 @@ def callback(locals_, globals_):
 #model = A2C('MlpPolicy', env, verbose=0,tensorboard_log="./tensorboard/")
 model = DQN('MlpPolicy', env, learning_rate=1e-3, prioritized_replay=True, verbose=0,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
 # Train the agent
-model.learn(total_timesteps=int(1e3),callback=callback)
+model.learn(total_timesteps=int(5e5),callback=callback)
 # Save the agent
 path = os.getenv("HOME")+"/models/model_"
 model.save(path)
