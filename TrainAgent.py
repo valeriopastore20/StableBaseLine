@@ -18,7 +18,7 @@ num_steps = 0
 def callback(locals_, globals_):
     self_ = locals_['self']
     global num_steps
-    if (num_steps+1) % 2000 == 0:
+    if env.count == env.num_prod+10:
         current_impr = (env.initial_sum-env.current_sum)/env.initial_sum*100
         mff_impr =(env.initial_sum-env.mff_sum)/env.initial_sum*100
         over_mff = current_impr - mff_impr
