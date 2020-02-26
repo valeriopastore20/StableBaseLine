@@ -3,12 +3,14 @@ import gym
 import gym_qap
 import gym_qapImg
 import gym_qapConst
+import gym_qapImgConst
+
 
 from stable_baselines import DQN
 from stable_baselines import PPO2
 from stable_baselines.common.evaluation import evaluate_policy
 
-env = gym.make('qapConst-v0')
+env = gym.make('qapImgConst-v0')
 # It will check your custom environment and output additional warnings if needed
 check_env(env)
 

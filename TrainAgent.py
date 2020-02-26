@@ -2,6 +2,7 @@ import gym
 import gym_qap
 import gym_qapConst
 import gym_qapImg
+import gym_qapImgConst
 import tensorflow as tf
 import os
 
@@ -11,7 +12,7 @@ from stable_baselines import A2C
 from stable_baselines import PPO2
 from stable_baselines.common.evaluation import evaluate_policy
 
-env = gym.make('qapConst-v0')
+env = gym.make('qap-v0')
 
 num_step = 0
 def callback(locals_, globals_):
@@ -30,9 +31,10 @@ def callback(locals_, globals_):
 
 # Instantiate the agent
 #model = A2C('MlpPolicy', env, verbose=0,tensorboard_log="./tensorboard/")
-model = DQN('MlpPolicy', env, learning_rate=1e-2, prioritized_replay=True, verbose=0,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
+#model = DQN('CnnPolicy', env, learning_rate=1e-4, prioritized_replay=True, verbose=0,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
+model = DQN('MlpPolicy', env, learning_rate=1e-4, prioritized_replay=True, verbose=0,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
 # Train the agent
 model.learn(total_timesteps=int(7e5),callback=callback)
 # Save the agent
-path = os.getenv("HOME")+"/models/model_dqn_const_10_700k"
+path = os.getenv("HOME")+"/models/model_dqn_noConst_20_7e5"
 model.save(path)
