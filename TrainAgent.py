@@ -12,7 +12,7 @@ from stable_baselines import A2C
 from stable_baselines import PPO2
 from stable_baselines.common.evaluation import evaluate_policy
 
-env = gym.make('qap-v0')
+env = gym.make('qapImgConst-v0')
 
 num_step = 0
 def callback(locals_, globals_):
@@ -34,7 +34,12 @@ def callback(locals_, globals_):
 #model = DQN('CnnPolicy', env, learning_rate=1e-4, prioritized_replay=True, verbose=0,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
 model = DQN('MlpPolicy', env, learning_rate=1e-4, prioritized_replay=True, verbose=0,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
 # Train the agent
+path = os.getenv("HOME")+"/models/model_dqnCnn_const_100_7e5"
+#model = DQN.load(path,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
+#model.set_env(env)
+
 model.learn(total_timesteps=int(7e5),callback=callback)
 # Save the agent
-path = os.getenv("HOME")+"/models/model_dqn_noConst_20_7e5"
+#path = os.getenv("HOME")+"/models/model_dqn_noConst_25_Retrained"
+
 model.save(path)
