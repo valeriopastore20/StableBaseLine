@@ -34,7 +34,7 @@ def callback(locals_, globals_):
 #model = DQN('CnnPolicy', env, learning_rate=1e-4, prioritized_replay=True, verbose=0,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
 model = DQN('MlpPolicy', env, learning_rate=1e-4, prioritized_replay=True, verbose=0,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
 # Train the agent
-path = os.getenv("HOME")+"/models/model_dqnCnn_const_49_7e5"
+path = os.getenv("HOME")+"/models/model_"
 #model = DQN.load(path,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
 #model.set_env(env)
 
