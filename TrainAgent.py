@@ -37,7 +37,7 @@ def callback(locals_, globals_):
 
 # Instantiate the agent
 policy = "CnnPolicy" if "Img" in args.env else "MlpPolicy"
-model = DQN(policy, env, learning_rate=args.lr, prioritized_replay=True, verbose=1,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
+model = DQN(policy, env, learning_rate=args.lr, prioritized_replay=True, verbose=1,tensorboard_log=os.getenv("HOME")+"/tensorboard/"+args.model_name)
 # Train the agent
 path = os.getenv("HOME")+"/models/"+args.model_name
 model.learn(total_timesteps=int(args.steps),callback=callback)
