@@ -32,13 +32,13 @@ def callback(locals_, globals_):
 # Instantiate the agent
 #model = A2C('MlpPolicy', env, verbose=0,tensorboard_log="./tensorboard/")
 #model = DQN('CnnPolicy', env, learning_rate=1e-4, prioritized_replay=True, verbose=0,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
-model = DQN('MlpPolicy', env, learning_rate=1e-4, prioritized_replay=True, verbose=0,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
+model = DQN('MlpPolicy', env, learning_rate=1e-4, prioritized_replay=True, verbose=1,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
 # Train the agent
 path = os.getenv("HOME")+"/models/model_"
 #model = DQN.load(path,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
 #model.set_env(env)
 
-model.learn(total_timesteps=int(7e5),callback=callback)
+model.learn(total_timesteps=int(1e4),callback=callback)
 # Save the agent
 #path = os.getenv("HOME")+"/models/model_dqn_noConst_25_Retrained"
 
