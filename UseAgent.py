@@ -5,6 +5,7 @@ import gym_qapImg
 import gym_qapImgConst
 import matplotlib.pyplot as plt
 import os
+import argparse
 
 from stable_baselines import DQN
 from stable_baselines import A2C
@@ -13,19 +14,28 @@ from stable_baselines.common.evaluation import evaluate_policy
 
 
 
-env = gym.make('qapConst-v0')
+parser = argparse.ArgumentParser()
+parser.add_argument("num_prod", type=int, help="Numero di prodotti su cui il modello e' stato allenato")
+parser.add_argument("num_sim", type=int, help="Numero di simulazioni da effettuare")
+parser.add_argument("model_name", type=str, help="Nome del modello da testare")
+parser.add_argument("env", type=str, help="Nome dell'environment: Const lo stato iniziale e' fisso, \
+    Img l'osservazione e' basata sull'immagine ", choices = ['qapConst-v0', 'qapImgConst-v0', 'qap-v0', 'qapImg-v0'])
+args = parser.parse_args()
+
+env = gym.make(args.env)
+
 
 # Load the trained agent
-path = os.getenv("HOME")+"/models/model_dqn_const_50_7e5"
-model = DQN.load(path,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
+path = os.getenv("HOME")+"/models/"+args.model_name
+model = DQN.load(path)
 model.set_env(env)
 
 # Evaluate the agent
-mean_reward, n_steps = evaluate_policy(model, env, n_eval_episodes=10)
+#mean_reward, n_steps = evaluate_policy(model, env, n_eval_episodes=10)
 
 
 # Enjoy trained agent
-num_simulations = 100
+num_simulations = args.num_sim
 x = [i for i in range(0,num_simulations)] 
 y1 = [0 for j in range(0,num_simulations)]
 y2 = [0 for j in range(0,num_simulations)]
