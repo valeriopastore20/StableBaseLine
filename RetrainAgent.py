@@ -38,7 +38,7 @@ def callback(locals_, globals_):
 
 # Train the agent
 path = os.getenv("HOME")+"/models/"+args.model_name
-model = DQN.load(path,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
+model = DQN.load(path,tensorboard_log=os.getenv("HOME")+"/tensorboard/"+args.model_name)
 model.set_env(env)
 model.learn(total_timesteps=int(args.steps),callback=callback)
 # Save the agent
