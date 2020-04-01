@@ -5,14 +5,20 @@ import gym_qapImg
 import gym_qapImgConst
 import tensorflow as tf
 import os
-
+import argparse
 
 from stable_baselines import DQN
-from stable_baselines import A2C
-from stable_baselines import PPO2
-from stable_baselines.common.evaluation import evaluate_policy
 
-env = gym.make('qapConst-v0')
+parser = argparse.ArgumentParser()
+parser.add_argument("num_prod", type=float, help="Numero prodotti (deve essere un quadrato)")
+parser.add_argument("steps", type=float, help="Numero di steps da effettuare Es.[2e5]")
+parser.add_argument("lr", type=float, help="learning_rate Es[1e-4]")
+parser.add_argument("model_name", type=str, help="model name to be saved")
+parser.add_argument("env", type=str, help="Nome dell'environment: Const lo stato iniziale e' fisso, \
+    Img l'osservazione e' basata sull'immagine ", choices = ['qapConst-v0', 'qapImgConst-v0', 'qap-v0', 'qapImg-v0'])
+args = parser.parse_args()
+
+env = gym.make(args.env)
 
 num_step = 0
 def callback(locals_, globals_):
@@ -30,16 +36,10 @@ def callback(locals_, globals_):
     return True
 
 # Instantiate the agent
-#model = A2C('MlpPolicy', env, verbose=0,tensorboard_log="./tensorboard/")
-#model = DQN('CnnPolicy', env, learning_rate=1e-4, prioritized_replay=True, verbose=0,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
-model = DQN('MlpPolicy', env, learning_rate=1e-4, prioritized_replay=True, verbose=1,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
+policy = "CnnPolicy" if "Img" in args.env else "MlpPolicy"
+model = DQN(policy, env, learning_rate=args.lr, prioritized_replay=True, verbose=1,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
 # Train the agent
-path = os.getenv("HOME")+"/models/model_"
-#model = DQN.load(path,tensorboard_log=os.getenv("HOME")+"/tensorboard/")
-#model.set_env(env)
-
-model.learn(total_timesteps=int(1e4),callback=callback)
+path = os.getenv("HOME")+"/models/"+args.model_name
+model.learn(total_timesteps=int(args.steps),callback=callback)
 # Save the agent
-#path = os.getenv("HOME")+"/models/model_dqn_noConst_25_Retrained"
-
 model.save(path)
