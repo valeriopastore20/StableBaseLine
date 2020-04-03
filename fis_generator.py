@@ -12,7 +12,7 @@ parser.add_argument("num_prod", type=int, help="Numero prodotti (deve essere un 
 parser.add_argument("max_fq", type=int, help="frequenza piu' alta")
 args = parser.parse_args()
 
-dec_fact = 4 #decreasing factor
+dec_fact = 4.0 #decreasing factor
 min_fract = 10
 max_fract = 5
 
