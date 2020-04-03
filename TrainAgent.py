@@ -53,7 +53,7 @@ if args.retrain == "no_retrain":
 		policy = CustomDQNPolicy
 	else:
 		policy = "CnnPolicy" if "Img" in args.env else "MlpPolicy"
-	model = DQN(policy, env, learning_rate=args.lr, prioritized_replay=True, verbose=1,tensorboard_log=os.getenv("HOME")+"/tensorboard/"+args.model_name)
+	model = DQN(policy, env, gamma = 1, learning_rate=args.lr, prioritized_replay=True, verbose=1,tensorboard_log=os.getenv("HOME")+"/tensorboard/"+args.model_name)
 	# Train the agent
 	model.learn(total_timesteps=int(args.steps),callback=callback)
 	# Save the agent
