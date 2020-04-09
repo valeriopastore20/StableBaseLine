@@ -49,8 +49,7 @@ class CustomDQNPolicy(FeedForwardPolicy):
                                            layer_norm=False,
                                            feature_extraction="mlp")
 
-path = Path(os.getenv("HOME")+"/models")
-os.mkdir(path)
+Path(os.getenv("HOME")+"/models").mkdir(parents=True, exist_ok=True)
 path = Path(os.getenv("HOME")+"/models/"+args.model_name)
 if args.retrain == "no_retrain":
 	# Instantiate the agent
