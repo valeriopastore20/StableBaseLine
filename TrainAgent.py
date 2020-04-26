@@ -45,8 +45,8 @@ def callback(locals_, globals_):
 class CustomDQNPolicy(FeedForwardPolicy):
     def __init__(self, *args, **kwargs):
         super(CustomDQNPolicy, self).__init__(*args, **kwargs,
-                                           layers=[32, 32],
-                                           layer_norm=False,
+                                           layers=[128, 128],
+                                           layer_norm=True,
                                            feature_extraction="mlp")
 
 Path(os.getenv("HOME")+"/models").mkdir(parents=True, exist_ok=True)
